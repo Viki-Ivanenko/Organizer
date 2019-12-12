@@ -17,34 +17,38 @@ namespace Organizer
 
         static public void Menu()
         {
-            Console.Clear();
-            //Выводим меню, его пункты с соответствующими цифрами\символами
-            Console.WriteLine("### MENU ###");
-            Console.WriteLine("1. Пункт меню");
-            Console.WriteLine("2. Чтение и запись файлов");
-            Console.WriteLine("3. Пункт меню");
-            Console.WriteLine("4. Exit");
-            Console.Write("\n" + "Введите команду: ");
-
-            char ch = char.Parse(Console.ReadLine()); //Тут желательно сделать проверку, или считывать всю строку, и в switch уже отсеивать
-
-            switch (ch)
+            while (true)
             {
-                case '1':
-                    Console.WriteLine("### Hello1 ###");
-                    Console.ReadKey();
-                    break;
-                case '2':
-                    Read_Write();
-                    break;
-                case '3':
-                    Start_app();
-                    break;
-                case '4':
-                    Console.WriteLine("### Hello4 ###");
-                    break;
+                Console.Clear();
+                //Выводим меню, его пункты с соответствующими цифрами\символами
+                Console.WriteLine("### MENU ###");
+                Console.WriteLine("1. Пункт меню");
+                Console.WriteLine("2. Чтение и запись файлов");
+                Console.WriteLine("3. Пункт меню");
+                Console.WriteLine("4. Exit");
+                Console.Write("\n" + "Введите команду: ");
+
+                char ch = char.Parse(Console.ReadLine()); //Тут желательно сделать проверку, или считывать всю строку, и в switch уже отсеивать
+
+                switch (ch)
+                {
+                    case '1':
+                        Console.WriteLine("### Hello1 ###");
+                        Console.ReadKey();
+                        break;
+                    case '2':
+                        Read_Write();
+                        break;
+                    case '3':
+                        Start_app();
+                        break;
+                    case '4':
+                        Console.WriteLine("### Hello4 ###");
+                        break;
+                }
             }
         }
+
 
         public static void Read_Write()
         {
