@@ -110,7 +110,9 @@ namespace Organizer
 
         private void GetInfo()
         {
-            string url = "http://api.openweathermap.org/data/2.5/weather?q=Kharkiv&units=metric&appid=714c8a7af174f3905091375bfd001e49";
+            Console.Write("Ваш город: ");
+            string city = Console.ReadLine();
+            string url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=714c8a7af174f3905091375bfd001e49";
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             string response;
@@ -131,25 +133,39 @@ namespace Organizer
         private void SendMessage()
         {
             // отправитель - устанавливаем адрес и отображаемое в письме имя
-            MailAddress from = new MailAddress("viktoryivanenko@gmail.com", "Viki");
+            Console.Write("Ваш e-mail: ");
+            string yourmail = Console.ReadLine();
+            Console.Write("Ваше имя: ");
+            string yourname = Console.ReadLine();
+            MailAddress from = new MailAddress(yourmail, yourname);
             // кому отправляем
-            MailAddress to = new MailAddress("viktoriia.ivanenko@nure.ua");
+            Console.Write("E-mail получателя: ");
+            string tomail = Console.ReadLine();
+            MailAddress to = new MailAddress(tomail);
             // создаем объект сообщения
             MailMessage m = new MailMessage(from, to);
             // тема письма
-            m.Subject = "Тест";
+            Console.Write("Тема: ");
+            string subj = Console.ReadLine();
+            m.Subject = subj;
             // текст письма
-            m.Body = "<h2>Письмо-тест работы smtp-клиента</h2>";
+            Console.Write("Текст: ");
+            string text = Console.ReadLine();
+            m.Body = "<h2>" + text + "</h2>";
             // письмо представляет код html
             m.IsBodyHtml = true;
             // адрес smtp-сервера и порт, с которого будем отправлять письмо
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
             // логин и пароль
-            smtp.Credentials = new NetworkCredential("viktoryivanenko@gmail.com", "vikiliki2904");
+            Console.Write("Ваш login: ");
+            string log = Console.ReadLine();
+            Console.Write("Ваш password: ");
+            string pas = Console.ReadLine();
+            smtp.Credentials = new NetworkCredential(log, pas);
             smtp.EnableSsl = true;
             smtp.Send(m);
             Console.WriteLine("Письмо отправлено");
-            Console.Read();
+            Console.ReadKey();
         }
 
         public void Start()
