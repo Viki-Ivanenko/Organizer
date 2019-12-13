@@ -119,6 +119,11 @@ namespace Organizer
             }
             WeatherResponse weatherResponse = JsonConvert.DeserializeObject<WeatherResponse>(response);
             Console.WriteLine("Temperature in {0}: {1} C", weatherResponse.Name, weatherResponse.Main.Temp);
+            Console.WriteLine("Temperature feels like: {0} C", weatherResponse.Main.Feels_Like);
+            Console.WriteLine("Min Temperature: {0} C", weatherResponse.Main.Temp_Min);
+            Console.WriteLine("MaxTemperature: {0} C", weatherResponse.Main.Temp_Max);
+            Console.WriteLine("Pressure in {0}: {1} hpa", weatherResponse.Name, weatherResponse.Main.Pressure);
+            Console.WriteLine("Humidity in {0}: {1} %", weatherResponse.Name, weatherResponse.Main.Humidity);
             Console.ReadKey();
         }
         
