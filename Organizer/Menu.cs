@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace Organizer
                 Console.WriteLine("1. Узнать погоду");
                 Console.WriteLine("2. Чтение и запись файлов");
                 Console.WriteLine("3. Запустить программу");
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("4. Отправить письмо");
                 Console.Write("\n" + "Введите команду: ");
 
                 char ch = char.Parse(Console.ReadLine()); //Тут желательно сделать проверку, или считывать всю строку, и в switch уже отсеивать
@@ -39,7 +40,7 @@ namespace Organizer
                         StartApp();
                         break;
                     case '4':
-                        Console.WriteLine("### Hello4 ###");
+                        SendMessage();
                         break;
                 }
             }
@@ -127,6 +128,29 @@ namespace Organizer
             Console.ReadKey();
         }
         
+        private void SendMessage()
+        {
+            // отправитель - устанавливаем адрес и отображаемое в письме имя
+            MailAddress from = new MailAddress("viktoryivanenko@gmail.com", "Viki");
+            // кому отправляем
+            MailAddress to = new MailAddress("viktoriia.ivanenko@nure.ua");
+            // создаем объект сообщения
+            MailMessage m = new MailMessage(from, to);
+            // тема письма
+            m.Subject = "Тест";
+            // текст письма
+            m.Body = "<h2>Письмо-тест работы smtp-клиента</h2>";
+            // письмо представляет код html
+            m.IsBodyHtml = true;
+            // адрес smtp-сервера и порт, с которого будем отправлять письмо
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            // логин и пароль
+            smtp.Credentials = new NetworkCredential("viktoryivanenko@gmail.com", "vikiliki2904");
+            smtp.EnableSsl = true;
+            smtp.Send(m);
+            Console.WriteLine("Письмо отправлено");
+            Console.Read();
+        }
 
         public void Start()
         {
